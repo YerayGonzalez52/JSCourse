@@ -44,3 +44,27 @@ switch (userType) {
 }
 
 console.log("User Category:", userCategory);
+
+let isAuthenticated = true;
+
+let authenticationStatus = isAuthenticated ? "Authenticated" : "Not authenticated";
+
+console.log("Authentication Status:", authenticationStatus);
+
+let status = "enrolled member";
+let comunicate;
+
+if(status == "employee"){
+    comunicate = "authorized to have access to Dietary Services."
+}
+else if(status == "enrolled member"){
+    comunicate = "authorized to have access to Dietary Services and one-on-one interaction with a dietician."
+}
+else if(status == "subscriber"){
+    comunicate = "authorized to have partial access to facilitate"
+}
+else if(status == "non-subscriber"){
+    comunicate = "they need to enroll or at least subscribe first to avail this facility"
+}
+
+console.log(comunicate);
