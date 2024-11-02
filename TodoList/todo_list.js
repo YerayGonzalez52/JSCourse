@@ -1,32 +1,35 @@
 const taskInput = document.getElementById("taskInput");
+
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskList = document.getElementById("taskList");
 const clearCompletedBtn = document.getElementById("clearCompletedBtn");
+const clearAllBtn = document.getElementById("clearAllBtn");
 
 
 let tasks = [];
 
-function addTask() {
+function addTask(){
     const taskText = taskInput.value.trim();
-    if (taskText !== "") {
-        tasks.push({ text: taskText});
+    if(taskText !== ""){
+        tasks.push({text: taskText});
         taskInput.value = "";
         displayTasks();
     }
 }
 
-function displayTasks() {
+function displayTasks(){
     taskList.innerHTML = "";
-    tasks.forEach((task, index) => {
+    for(let i = 0; i < tasks.length; i++){
         const li = document.createElement("li");
-        li.innerHTML = `<input type="checkbox" id="task-${index}" ${task.completed ? "checked" : ""}>
-            <label for="task-${index}">${task.text}</label>`;
-        li.querySelector("input").addEventListener("change", () => toggleTask(index));
+        const task = tasks[i];
+        li.innerHTML = `<input type="checkbox" id="task-${i}" ${task.completed ? "checked" : ""}>
+                    <label for="task-${i}">${task.text}</label>`;
+        li.querySelector("input").addEventListener("change", () => toggleTask(i));
         taskList.appendChild(li);
-    });
+    };
 }
 
-function toggleTask(index) {
+function toggleTask(index){
     tasks[index].completed = !tasks[index].completed;
     displayTasks();
 }
@@ -36,13 +39,13 @@ function clearCompletedTasks() {
     displayTasks();
 }
 
-function clearAllTasks(){
+function clearAll(){
     tasks = [];
     displayTasks();
 }
 
+clearAllBtn.addEventListener("click", clearAll);  // Asocia la función al botón
 addTaskBtn.addEventListener("click", addTask);
 clearCompletedBtn.addEventListener("click", clearCompletedTasks);
-clearAllBtn.addEventListener("click", clearAllTasks);
 
 displayTasks();
